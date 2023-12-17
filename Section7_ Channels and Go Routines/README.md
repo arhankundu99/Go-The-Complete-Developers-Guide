@@ -15,7 +15,7 @@ Now javascript is a single threaded and synchronous language. Does it support pa
 
 Javascript does not have threads, but when we have things like network io, file io, setTimeout etc, these things are handled by node runtime.
 
-For operations like fileio, dns lookup, crypto and zlib, libuv handles it using thread pool. Network IO is handled by OS (The operations are offloaded to libuv and then libuv offloads to os) and the timers are handled by event loop (Before the timer phase of the event loop, the event loop checks whether any timer has passed and adds the relavant callbacks in the timer callback in the timer queue). But this is the part of the javascript runtime (Eg Node) and not javascript itself. So we can say that javascript does not support parallelism but the runtime supports parallelism.
+For operations like fileio, dns lookup, crypto and zlib, libuv handles it using thread pool. Network IO is handled by OS (The operations are offloaded to libuv and then libuv offloads to os) and the timers are handled by event loop (Before the timer phase of the event loop, the event loop checks whether any timer has passed and executes the callbacks). But this is the part of the javascript runtime (Eg Node) and not javascript itself. So we can say that javascript does not support parallelism but the runtime supports parallelism.
 
 And regarding concurrency, javascript achieves concurrency with the help of its event loop (See, Although its not concurrency using multiple threads, it acheives a similar effect using event loop. For eg., When a promise is encountered, the context is switched and when the promise is resolved or rejected, the context may again be switched to execute the callback).
 
